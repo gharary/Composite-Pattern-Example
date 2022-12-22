@@ -25,6 +25,6 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "ImageLoaderWithFallbackCompositeTests",
-            dependencies: ["ImageLoaderWithFallbackComposite"]),
+            dependencies: ["ImageLoaderWithFallbackComposite", "Domain", "Networking"]),
     ]
 )
