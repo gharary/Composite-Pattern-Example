@@ -20,10 +20,7 @@ final class ImageLoaderWithFallbackCompositeTests: XCTestCase {
         let primaryImage = uniqueImage()
         let fallbackImage = uniqueImage()
         
-        let primaryLoader = loaderStub(result: .success(primaryImage))
-        let fallbackLoader = loaderStub(result: .success(fallbackImage))
-        
-        let sut = ImageLoaderWithFallbackComposite(primary: primaryLoader, fallback: fallbackLoader)
+        let sut = makeSUT(primaryResult: .success(primaryImage), fallbackResult: .success(fallbackImage))
         
         let exp = expectation(description: "Wait for load completion")
         
@@ -58,5 +55,15 @@ final class ImageLoaderWithFallbackCompositeTests: XCTestCase {
         func load(completion: @escaping (ImageLoader.Result) -> Void) {
             completion(result)
         }
+    }
+    
+    private func makeSUT(primaryResult: ImageLoader.Result, fallbackResult: ImageLoader.Result, file: StaticString = #file, line: UInt = #line) -> ImageLoader {
+        
+        let primaryLoader = loaderStub(result: primaryResult)
+        let fallbackLoader = loaderStub(result: fallbackResult)
+        
+        let sut = ImageLoaderWithFallbackComposite(primary: primaryLoader, fallback: fallbackLoader)
+        
+        return sut
     }
 }
