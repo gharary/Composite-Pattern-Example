@@ -41,6 +41,13 @@ final class ImageLoaderWithFallbackCompositeTests: XCTestCase {
         expect(sut, toCompleteWith: .success(fallbackImage))
     }
     
+    func test_load_deliversErrorOnBothPrimaryAndFallbackLoaderFailure() {
+        let sut = makeSUT(primaryResult: .failure(anyNSError()), fallbackResult: .failure(anyNSError()))
+        
+        expect(sut, toCompleteWith: .failure(anyNSError()))
+    }
+    
+    
     // MARK: - Helpers
     
     private func uniqueImage() -> [ImageItem] {
