@@ -4,13 +4,22 @@ import XCTest
 
 class ImageLoaderWithFallbackComposite: ImageLoader {
     private let primary: ImageLoader
+    private let fallback: ImageLoader
     
     init(primary: ImageLoader, fallback: ImageLoader) {
         self.primary = primary
+        self.fallback = fallback
     }
     
     func load(completion: @escaping (ImageLoader.Result) -> Void) {
-        primary.load(completion: completion)
+        primary.load { [weak self] result in
+            switch result {
+            case .success:
+                completion(result)
+            case .failure:
+                self?.fallback.load(completion: completion)
+            }
+        }
     }
 }
 
@@ -39,10 +48,34 @@ final class ImageLoaderWithFallbackCompositeTests: XCTestCase {
         wait(for: [exp], timeout: 1)
     }
     
+    func test_load_deliversFallbackOnPrimaryFailure() {
+        let fallbackImage = uniqueImage()
+        let sut = makeSUT(primaryResult: .failure(anyNSError()), fallbackResult: .success(fallbackImage))
+        
+        let exp = expectation(description: "Wait for load completion")
+        
+        sut.load { result in
+            switch result {
+            case let .success(receivedImage):
+                XCTAssertEqual(receivedImage, fallbackImage)
+                
+            case .failure:
+                XCTFail("Expected successfull load image result, got \(result) instead")
+            }
+            
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1)
+    }
+    
     // MARK: - Helpers
     
     private func uniqueImage() -> [ImageItem] {
         return [ImageItem(id: UUID(), description: "any", url: URL(string: "http://any-url.com")!)]
+    }
+    
+    private func anyNSError() -> NSError {
+        return NSError(domain: "any error", code: 0)
     }
     
     private class loaderStub: ImageLoader {
