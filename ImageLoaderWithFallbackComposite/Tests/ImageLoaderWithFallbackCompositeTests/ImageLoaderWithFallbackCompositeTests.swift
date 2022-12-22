@@ -64,6 +64,16 @@ final class ImageLoaderWithFallbackCompositeTests: XCTestCase {
         
         let sut = ImageLoaderWithFallbackComposite(primary: primaryLoader, fallback: fallbackLoader)
         
+        trackForMemoryLeaks(primaryLoader, file: file, line: line)
+        trackForMemoryLeaks(fallbackLoader, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        
         return sut
+    }
+    
+    private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #file, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.", file: file, line: line)
+        }
     }
 }
