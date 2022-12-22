@@ -6,21 +6,40 @@
 //
 
 import SwiftUI
+import Domain
 
-struct ContentView: View {
-    var body: some View {
+public struct ContentView: View {
+    @ObservedObject var viewModel: ViewModel
+    
+    public var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text("Composite Pattern Example!")
+                .font(.title)
+                .foregroundColor(.black)
+            ForEach(viewModel.images, id: \.id) { ImageViewItem(imageItem: $0) }
         }
-        .padding()
+        .onAppear {
+            viewModel.loadImages()
+        }
     }
+    
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+struct ImageViewItem: View {
+    
+    let imageItem: ImageItem
+    
+    var body: some View {
+        VStack {
+            AsyncImage(url: imageItem.url)
+                .frame(width: 200, height: 200)
+                .scaledToFit()
+            if let description = imageItem.description {
+                Text(description)
+                    .font(.title2)
+                    .foregroundColor(.black)
+            }
+        }.padding()
+        .background(Color.red)
     }
 }
