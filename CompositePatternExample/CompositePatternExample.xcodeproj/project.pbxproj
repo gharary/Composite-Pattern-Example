@@ -13,6 +13,9 @@
 		BE8B9EDB2954421F00EA0DF1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE8B9EDA2954421F00EA0DF1 /* Preview Assets.xcassets */; };
 		BE8B9EE3295442D300EA0DF1 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = BE8B9EE2295442D300EA0DF1 /* Domain */; };
 		BE8B9EE5295442D600EA0DF1 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = BE8B9EE4295442D600EA0DF1 /* Networking */; };
+		BE8B9EE8295446AB00EA0DF1 /* UIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8B9EE7295446AB00EA0DF1 /* UIComposer.swift */; };
+		BE8B9EEA295446BB00EA0DF1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8B9EE9295446BB00EA0DF1 /* ViewModel.swift */; };
+		BE8B9EEC2954472000EA0DF1 /* ImageLoaderWithFallbackComposite in Frameworks */ = {isa = PBXBuildFile; productRef = BE8B9EEB2954472000EA0DF1 /* ImageLoaderWithFallbackComposite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,8 @@
 		BE8B9ED62954421F00EA0DF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE8B9ED82954421F00EA0DF1 /* CompositePatternExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CompositePatternExample.entitlements; sourceTree = "<group>"; };
 		BE8B9EDA2954421F00EA0DF1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BE8B9EE7295446AB00EA0DF1 /* UIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIComposer.swift; sourceTree = "<group>"; };
+		BE8B9EE9295446BB00EA0DF1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +35,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE8B9EE5295442D600EA0DF1 /* Networking in Frameworks */,
+				BE8B9EEC2954472000EA0DF1 /* ImageLoaderWithFallbackComposite in Frameworks */,
 				BE8B9EE3295442D300EA0DF1 /* Domain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,6 +63,7 @@
 		BE8B9ED12954421D00EA0DF1 /* CompositePatternExample */ = {
 			isa = PBXGroup;
 			children = (
+				BE8B9EE62954468F00EA0DF1 /* ViewModel */,
 				BE8B9ED22954421D00EA0DF1 /* CompositePatternExampleApp.swift */,
 				BE8B9ED42954421D00EA0DF1 /* ContentView.swift */,
 				BE8B9ED62954421F00EA0DF1 /* Assets.xcassets */,
@@ -81,6 +88,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BE8B9EE62954468F00EA0DF1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BE8B9EE7295446AB00EA0DF1 /* UIComposer.swift */,
+				BE8B9EE9295446BB00EA0DF1 /* ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -100,6 +116,7 @@
 			packageProductDependencies = (
 				BE8B9EE2295442D300EA0DF1 /* Domain */,
 				BE8B9EE4295442D600EA0DF1 /* Networking */,
+				BE8B9EEB2954472000EA0DF1 /* ImageLoaderWithFallbackComposite */,
 			);
 			productName = CompositePatternExample;
 			productReference = BE8B9ECF2954421D00EA0DF1 /* CompositePatternExample.app */;
@@ -156,6 +173,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE8B9ED52954421D00EA0DF1 /* ContentView.swift in Sources */,
+				BE8B9EE8295446AB00EA0DF1 /* UIComposer.swift in Sources */,
+				BE8B9EEA295446BB00EA0DF1 /* ViewModel.swift in Sources */,
 				BE8B9ED32954421D00EA0DF1 /* CompositePatternExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,6 +392,10 @@
 		BE8B9EE4295442D600EA0DF1 /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Networking;
+		};
+		BE8B9EEB2954472000EA0DF1 /* ImageLoaderWithFallbackComposite */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ImageLoaderWithFallbackComposite;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
